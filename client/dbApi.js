@@ -10,3 +10,19 @@ export function getNews () {
       if (err) throw Error('Cannot get news')
     })
 }
+
+export function getFriends (userId) {
+  return request.get(`${url}/getFriends/${userId}`)
+    .then(res => res.body)
+    .catch(err => {
+      if (err) throw Error('Cannot get news')
+    })
+}
+
+export function getChallenges () {
+  return request.get(`${url}/getChallenges`)
+    .then(res => res.body)
+    .catch(err => {
+      if (err) throw Error('Cannot get news')
+    })
+}

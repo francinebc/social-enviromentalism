@@ -1,33 +1,35 @@
 import React from 'react'
-import {getNews} from '../dbApi'
+import { getNews } from '../dbApi'
 import NewsPost from './NewsPost'
+import { Header } from 'semantic-ui-react'
 
 export default class Home extends React.Component {
-    constructor () {
-        super()
-        this.state = {
-            news: []
-        }
+  constructor() {
+    super()
+    this.state = {
+      news: []
     }
+  }
 
-    componentDidMount () {
-        getNews()
-        .then(news => {
-            this.setState({
-                news
-            })
-        })
-    }
+  componentDidMount() {
+    getNews().then(news => {
+      this.setState({
+        news
+      })
+    })
+  }
 
-    render () {
-        return (
-            <div>
-                {this.state.news.length > 0 && this.state.news.map(article => {
-                    return <NewsPost key={article.title} article={article}/>
-                })}
-            </div>
-        )
-    }
-
-
+  render() {
+    return (
+      <div>
+        <Header as="h2" icon textAlign="left" style={{ paddingTop: '1em', paddingBottom: '1em' }}>
+          <Header.Content>Recent Environmental News</Header.Content>
+        </Header>
+        {this.state.news.length > 0 &&
+          this.state.news.map(article => {
+            return <NewsPost key={article.title} article={article} />
+          })}
+      </div>
+    )
+  }
 }

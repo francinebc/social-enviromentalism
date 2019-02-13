@@ -1,5 +1,7 @@
 import React from 'react'
 import { HashRouter as Router, Route } from 'react-router-dom'
+import { Grid, Container } from 'semantic-ui-react'
+
 import Home from './Home'
 import Nav from './Nav'
 import FriendList from './FriendList'
@@ -12,15 +14,22 @@ const App = () => {
   return (
     <Router>
       <div>
-        <Nav className="nav-bar" />
-        {/* <FriendList className="friend-list" /> */}
-        <div className="contents">
-          <Route exact path="/" component={Home} />
-          {/* <Route path="/profile/:userId" component={Profile} />
-          <Route path="/challenges" component={Challenges} />
+        <Container style={{ marginTop: '3em' }}>
+          <Nav className="nav-bar" />
+          <Grid style={{ padding: '-1.5em' }}>
+            <Grid.Column width={4}>
+              <FriendList className="friend-list" userId="99901" />
+            </Grid.Column>
+            <Grid.Column width={12}>
+              <Route exact path="/" component={Home} />
+              <Route path="/challenges" component={Challenges} />
+              {/* <Route path="/profile/:userId" component={Profile} />
+          
           <Route path="/sign-up" component={SignUp} />
           <Route path="/login" component={Login} /> */}
-        </div>
+            </Grid.Column>
+          </Grid>
+        </Container>
       </div>
     </Router>
   )
