@@ -33,6 +33,7 @@
     "express": "^4.16.4",
     "knex": "^0.16.3",
     "react-router-dom": "^4.3.1",
+    "semantic-ui-react": "^0.85.0",
     "sqlite3": "^4.0.6",
     "superagent": "^4.0.0-beta.5"
   },
