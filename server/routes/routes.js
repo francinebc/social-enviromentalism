@@ -31,10 +31,27 @@ router.get('/getFriends/:userId', (req, res) => {
     })
 })
 
+router.get('/getProfile/:id', (req, res) => {
+    db.getProfile(req.params.id)
+    .then(data => contractProfile(data))
+    .then(data => res.json(data))
+    .catch(err => {
+        res.status(500).send(err.message)
+    })
+})
+
 function getFriends(friendships, userId) {
     return friendships.map(friendship => {
         return (friendship.user_id_1 === userId ? friendship.user_id_1 : friendship.user_id_2)
     })
+}
+
+function contractProfile(data) {
+    const actions = []
+    data.map(action => {
+        actions.push({actionId: action.id, description: action.description, actionTypeId: action.action_type_id, image: action.image})
+    })
+    return {name: data[0].name, karma: data[0].karma, userId: data[0].user_id, actions}
 }
 
 module.exports = router

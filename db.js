@@ -6,7 +6,8 @@ module.exports = {
   getNews,
   getFriendships,
   getUsers,
-  getChallenges
+  getChallenges,
+  getProfile
 }
 
 function getNews(db = connection) {
@@ -26,4 +27,10 @@ function getUsers(users, db = connection) {
   
 function getChallenges(db = connection) {
   return db('action-types')
+}
+
+function getProfile (id, db = connection) {
+  return db('users')
+    .join('action-posts', 'users.id', '=', 'action-posts.user_id')
+    .where('users.id', id)
 }
