@@ -1,6 +1,7 @@
 import React from 'react'
 import { getFriends } from '../dbApi'
-import { Grid, Image, Header, Icon } from 'semantic-ui-react'
+import { Grid, Image, Header, Container } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 export default class FriendList extends React.Component {
   constructor() {
@@ -36,6 +37,7 @@ export default class FriendList extends React.Component {
                       centered
                       circular
                     />
+                    <Container textAlign="center"><Link to={`/profile/${friend.id}`}>{friend.name}</Link></Container>
                   </Grid.Column>
                 )
               })}

@@ -18,10 +18,18 @@ export default class Profile extends React.Component {
     })
   }
 
+  componentWillReceiveProps(nextProps) {
+    getProfile(nextProps.match.params.userId).then(profile => {
+      this.setState({
+        profile
+      })
+    })
+  }
+
   render() {
     return (
       <div>
-        <Header as="h2" textAlign="left" style={{ paddingTop: '1em'}}>
+        <Header as="h2" textAlign="left" style={{ paddingTop: '1em' }}>
           <Header.Content>{this.state.profile.name}</Header.Content>
         </Header>
         <Header as="h3" textAlign="left" style={{ paddingBottom: '1em' }}>
