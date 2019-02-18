@@ -1,5 +1,5 @@
 import React from 'react'
-import { getChallenges } from '../dbApi'
+import { getChallenges } from '../api/dbApi'
 import { Header, Image } from 'semantic-ui-react'
 
 export default class Challenges extends React.Component {

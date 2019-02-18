@@ -1,5 +1,5 @@
 import React from 'react'
-import { getProfile } from '../dbApi'
+import { getProfile } from '../api/dbApi'
 import { Header, Image } from 'semantic-ui-react'
 
 export default class Profile extends React.Component {

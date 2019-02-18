@@ -1,5 +1,5 @@
 import React from 'react'
-import { getNews } from '../dbApi'
+import { getSubreddit } from '../api/reddit'
 import NewsPost from './NewsPost'
 import { Header } from 'semantic-ui-react'
 
@@ -12,7 +12,7 @@ export default class Home extends React.Component {
   }
 
   componentDidMount() {
-    getNews().then(news => {
+    getSubreddit().then(news => {
       this.setState({
         news
       })

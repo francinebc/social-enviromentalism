@@ -1,5 +1,5 @@
 import React from 'react'
-import { getFriends } from '../dbApi'
+import { getFriends } from '../api/dbApi'
 import { Grid, Image, Header, Container } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
