@@ -1,15 +1,16 @@
 const express = require("express");
 const router = express();
 const db = require("../../db");
+const token = require("../auth/token")
 
-router.post("/register", register);
+router.post("/register", register, token.issue);
 
-function register(req, res) {
+function register(req, res, next) {
   db.createUser(req.body)
     .then(([id]) => {
       res.locals.userId = id;
+      next()
     })
-    .then(() => res.status(201).json({ ok: true }))
     .catch(({ message }) => {
       // This is vulnerable to changing databases. SQLite happens to use
       // this message, but Postgres doesn't.
