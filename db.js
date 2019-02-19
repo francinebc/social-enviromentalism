@@ -2,12 +2,16 @@ const environment = process.env.NODE_ENV || 'development'
 const config = require('./knexfile')[environment]
 const connection = require('knex')(config)
 
+const {generateHash} = require('./server/auth/hash')
+
+
 module.exports = {
   getNews,
   getFriendships,
   getUsers,
   getChallenges,
-  getProfile
+  getProfile,
+  createUser
 }
 
 function getNews(db = connection) {
@@ -33,4 +37,9 @@ function getProfile (id, db = connection) {
   return db('users')
     .join('action-posts', 'users.id', '=', 'action-posts.user_id')
     .where('users.id', id)
+}
+
+function createUser ({username, password, name, image}, db = connection) {
+  return generateHash(password)
+  .then(hash => db('users').insert({username, name, image, hash}))
 }
