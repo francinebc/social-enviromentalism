@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express();
-const db = require("../../db");
+const db = require("../db/db");
 
 router.post("/register", register);
 
