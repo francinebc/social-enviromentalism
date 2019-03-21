@@ -1,8 +1,6 @@
 const express = require("express");
 const router = express();
-const db = require("../../db");
-const token = require("../auth/token")
-const verifyJwt = require("express-jwt")
+const db = require("../db/db");
 
 router.post("/register", register, token.issue);
 router.get(
