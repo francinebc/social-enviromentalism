@@ -2,8 +2,18 @@ const express = require("express");
 const router = express();
 const db = require("../../db");
 const token = require("../auth/token")
+const verifyJwt = require("express-jwt")
 
 router.post("/register", register, token.issue);
+router.get(
+  '/route-we-want-to-protect',
+  verifyJwt({secret: process.env.JWT_SECRET}),
+  routeWeWantToProtect
+)
+
+function routeWeWantToProtect (req, res) {
+  // ...
+}
 
 function register(req, res, next) {
   db.createUser(req.body)
