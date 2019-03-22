@@ -1,5 +1,5 @@
 import {setToken} from '../utils/tokens'
-import {register as registerApi, signin as signinApi} from '../api/auth'
+import {register as registerApi, login as loginApi} from '../api/auth'
 
 // Actions are payloads of information that send data from your application to your store. 
 
@@ -44,7 +44,7 @@ export const registerError = error => {
 // Sign in. Tokens are encrypted versions of a users password. This protects your password from Hackers.
 export const login = (user) => dispatch => {
   dispatch(signinPending())
-  return signinApi(user)
+  return loginApi(user)
     .then(res => {
       setToken(res.token)
       dispatch(signinSuccess())

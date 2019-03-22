@@ -1,4 +1,8 @@
-import React from "react"
+import React from 'react'
+import {connect} from 'react-redux'
+import {Redirect} from 'react-router-dom'
+
+import {register} from '../actions/auth'
 
 class Register extends React.Component {
   state = {
@@ -21,10 +25,25 @@ class Register extends React.Component {
   }
 
   handleSubmit = () => {
-    registerUser(this.state.user)
+    this.props.dispatch(register(this.state.user))
+    .then(() => {
+      this.setState({
+        submitted: true
+      })
+    })
+    .catch(error => {
+      this.setState({
+        error
+      })
+    })
   }
 
   render() {
+    if(this.state.submitted) {
+      return (
+        <Redirect to='/'/>
+      )
+    }
     return (
       <div>
         <div className="ui input">
@@ -63,4 +82,4 @@ class Register extends React.Component {
   }
 }
 
-export default Register
+export default connect()(Register)

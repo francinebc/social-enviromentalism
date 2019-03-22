@@ -36,7 +36,10 @@ function getProfile (id, db = connection) {
     .where('users.id', id)
 }
 
-function createUser ({username, password, name, image}, db = connection) {
-  return generateHash(password)
-  .then(hash => db('users').insert({username, name, image, hash}))
+function createUser (user, db = connection) {
+  return generateHash(user.password)
+  .then(hash => {
+    delete user.password
+    return db('users').insert({...user, hash})
+  })
 }
