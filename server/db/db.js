@@ -1,5 +1,4 @@
 const connection = require('./index')
-const {generateHash} = require('../auth/hash')
 
 
 module.exports = {
@@ -7,8 +6,7 @@ module.exports = {
   getFriendships,
   getUsers,
   getChallenges,
-  getProfile,
-  createUser
+  getProfile
 }
 
 function getNews(db = connection) {
@@ -34,9 +32,4 @@ function getProfile (id, db = connection) {
   return db('users')
     .join('action-posts', 'users.id', '=', 'action-posts.user_id')
     .where('users.id', id)
-}
-
-function createUser ({username, password, name, image}, db = connection) {
-  return generateHash(password)
-  .then(hash => db('users').insert({username, name, image, hash}))
 }
