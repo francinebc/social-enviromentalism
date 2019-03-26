@@ -25,7 +25,7 @@ class Nav extends React.Component {
             <Link to="/challenges">Challenges</Link>
           </Menu.Item>
           <Menu.Item>
-            <Link to={`/profile/${this.props.userId}`}>Profile</Link>
+            <Link to={`/profile`}>Profile</Link>
           </Menu.Item>
           <Menu.Menu position="right">
             <Menu.Item>

@@ -1,6 +1,10 @@
 const express = require('express')
 const router = express()
 const db = require('../db/db')
+const verifyJwt = require('express-jwt')
+const token = require('../auth/token')
+const error = require('./error')
+
 
 router.get('/getChallenges', (req, res) => {
     db.getChallenges()
@@ -10,8 +14,26 @@ router.get('/getChallenges', (req, res) => {
     })
 })
 
-router.get('/getFriends/:userId', (req, res) => {
-    db.getFriendships(req.params.userId)
+// gets any profile
+router.get('/getProfile/:id', (req, res) => {
+    db.getProfile(req.params.id)
+    .then(data => contractProfile(data))
+    .then(data => res.json(data))
+    .catch(err => {
+        res.status(500).send(err.message)
+    })
+})
+
+// routes below this need auth
+router.use(
+    verifyJwt({
+      secret: token.getSecret
+    }),
+    error.authCheckingError
+)
+
+router.get('/getFriends/', (req, res) => {
+    db.getFriendships(req.user.id)
     .then(friendships => {
         const friends = getFriends(friendships, req.params.userId)
         return db.getUsers(friends)
@@ -22,8 +44,9 @@ router.get('/getFriends/:userId', (req, res) => {
     })
 })
 
-router.get('/getProfile/:id', (req, res) => {
-    db.getProfile(req.params.id)
+// gets logged in user's profile
+router.get('/getUsersProfile', (req, res) => {
+    db.getProfile(req.user.id)
     .then(data => contractProfile(data))
     .then(data => res.json(data))
     .catch(err => {
@@ -42,7 +65,7 @@ function contractProfile(data) {
     data.map(action => {
         actions.push({actionId: action.id, description: action.description, actionTypeId: action.action_type_id, image: action.image})
     })
-    return {name: data[0].name, karma: data[0].karma, userId: data[0].user_id, actions}
+    return {name: data[0].firstName + data[0].lastName, karma: data[0].karma, userId: data[0].user_id, actions}
 }
 
 module.exports = router

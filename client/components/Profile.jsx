@@ -1,9 +1,11 @@
 import React from 'react'
-import { getProfile } from '../api/dbApi'
+import { getUsersProfile } from '../api/dbApi'
 import { Header, Image } from 'semantic-ui-react'
+import {withRouter} from 'react-router-dom'
 
-export default class Profile extends React.Component {
+class Profile extends React.Component {
   constructor(props) {
+    console.log('trying to construct')
     super(props)
     this.state = {
       profile: {}
@@ -11,15 +13,8 @@ export default class Profile extends React.Component {
   }
 
   componentDidMount() {
-    getProfile(this.props.match.params.userId).then(profile => {
-      this.setState({
-        profile
-      })
-    })
-  }
-
-  componentWillReceiveProps(nextProps) {
-    getProfile(nextProps.match.params.userId).then(profile => {
+    getUsersProfile()
+    .then(profile => {
       this.setState({
         profile
       })
@@ -48,3 +43,5 @@ export default class Profile extends React.Component {
     )
   }
 }
+
+export default withRouter(Profile)

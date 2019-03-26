@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken')
 
 module.exports = {
-  issue
+  issue,
+  getSecret
 }
 
 function issue (req, res) {
@@ -14,4 +15,9 @@ function issue (req, res) {
 
 function createToken (id) {
   return jwt.sign({id}, process.env.JWT_SECRET, {expiresIn: '1d'})
+}
+
+function getSecret (req, payload, done) {
+  const secret = process.env.JWT_SECRET || jwtTestSecret
+  done(null, secret)
 }
