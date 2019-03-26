@@ -2,9 +2,16 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Menu } from 'semantic-ui-react'
 
-export default class Nav extends React.Component {
+import {logout} from '../actions/auth'
+import { connect } from 'react-redux';
+
+class Nav extends React.Component {
   constructor() {
     super()
+  }
+
+  handleLogout = () => {
+    this.props.dispatch(logout())
   }
 
   render() {
@@ -27,9 +34,14 @@ export default class Nav extends React.Component {
             <Menu.Item>
               <Link to="/login">login</Link>
             </Menu.Item>
+            <Menu.Item>
+              <button className="ui button" onClick={this.handleLogout}>Logout</button>
+            </Menu.Item>
           </Menu.Menu>
         </Menu>
       </div>
     )
   }
 }
+
+export default connect()(Nav)

@@ -41,7 +41,7 @@ function register (req, res, next) {
 function validateLogin (req, res, next) {
   const {email, password} = req.body
   if (!email) {
-    return next(new Error('No username provided'))
+    return next(new Error('No email provided'))
   }
   if (!password) {
     return next(new Error('No password provided'))

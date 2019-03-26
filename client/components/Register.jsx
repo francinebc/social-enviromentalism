@@ -76,7 +76,7 @@ class Register extends React.Component {
             onChange={this.handleChange}
           />
         </div>
-        <button className="ui button" onClick={this.handleSubmit}>Submit</button>
+        <button className="ui button" onClick={this.handleSubmit}>Sign Up</button>
       </div>
     )
   }
