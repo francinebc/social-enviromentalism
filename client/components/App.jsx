@@ -26,7 +26,7 @@ const App = () => {
             <Route path="/challenges" component={Challenges} />
             <Route path="/profile/:userId" component={Profile} />
             <Route path="/sign-up" component={Register} />
-            {/*<Route path="/login" component={Login} /> */}
+            <Route path="/login" component={Login} />
           </Grid.Column>
         </Grid>
       </Container>

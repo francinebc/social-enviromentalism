@@ -10,14 +10,14 @@ const initialState = {
 
 export default function authReducer (state = initialState, action) {
   switch (action.type) {
-    case 'SIGNIN_PENDING':
+    case 'LOGIN_PENDING':
     case 'REGISTER_PENDING':
       return {
         ...state,
         loggedIn: false,
         pending: true
       }
-    case 'SIGNIN_SUCCESS':
+    case 'LOGIN_SUCCESS':
       return {
         ...state,
         error: null,
@@ -32,7 +32,7 @@ export default function authReducer (state = initialState, action) {
         loggedIn: true,
         pending: false
       }
-    case 'SIGNIN_ERROR':
+    case 'LOGIN_ERROR':
     case 'REGISTER_ERROR':
       return {
         ...state,

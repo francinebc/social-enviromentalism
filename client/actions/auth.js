@@ -3,22 +3,22 @@ import {register as registerApi, login as loginApi} from '../api/auth'
 
 // Actions are payloads of information that send data from your application to your store. 
 
-// Actions for signing in and registering
-export const signinPending = () => {
+// Actions for loging in and registering
+export const loginPending = () => {
   return {
-    type: 'SIGNIN_PENDING'
+    type: 'LOGIN_PENDING'
   }
 }
 
-export const signinSuccess = () => {
+export const loginSuccess = () => {
   return {
-    type: 'SIGNIN_SUCCESS'
+    type: 'LOGIN_SUCCESS'
   }
 }
 
-export const signinError = error => {
+export const loginError = error => {
   return {
-    type: 'SIGNIN_ERROR',
+    type: 'LOGIN_ERROR',
     error
   }
 }
@@ -43,14 +43,14 @@ export const registerError = error => {
 }
 // Sign in. Tokens are encrypted versions of a users password. This protects your password from Hackers.
 export const login = (user) => dispatch => {
-  dispatch(signinPending())
+  dispatch(loginPending())
   return loginApi(user)
     .then(res => {
       setToken(res.token)
-      dispatch(signinSuccess())
+      dispatch(loginSuccess())
     })
     .catch(err => {
-      dispatch(signinError(err))
+      dispatch(loginError(err))
     })
 }
 
