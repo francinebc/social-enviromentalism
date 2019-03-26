@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
+import { Route, withRouter } from 'react-router-dom'
 import { Grid, Container } from 'semantic-ui-react'
 
 import Home from './Home'
@@ -10,7 +10,7 @@ import Challenges from './Challenges'
 import Register from './Register'
 import Login from './Login'
 
-const currentUser = "99901"
+const currentUser = "1"
 
 const App = () => {
   return (
@@ -24,7 +24,7 @@ const App = () => {
           <Grid.Column width={16}>
             <Route exact path="/" component={Home} />
             <Route path="/challenges" component={Challenges} />
-            <Route path="/profile/:userId" component={Profile} />
+            <Route path="/profile" component={Profile} />
             <Route path="/sign-up" component={Register} />
             <Route path="/login" component={Login} />
           </Grid.Column>
@@ -34,4 +34,4 @@ const App = () => {
   )
 }
 
-export default App
+export default withRouter(App)

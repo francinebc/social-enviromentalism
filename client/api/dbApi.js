@@ -15,7 +15,6 @@ export function getFriends () {
 
 export function getChallenges () {
   return request.get(`${url}/getChallenges`)
-    .set({Authorization: `Bearer ${getToken()}`})
     .then(res => res.body)
     .catch(err => {
       if (err) throw Error('Cannot get challenges')
@@ -24,7 +23,6 @@ export function getChallenges () {
 
 export function getProfile (id) {
   return request.get(`${url}/getProfile/${id}`)
-    .set({Authorization: `Bearer ${getToken()}`})
     .then(res => res.body)
     .catch(err => {
       if (err) throw Error('Cannot get profile')
